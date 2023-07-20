@@ -3,25 +3,25 @@ import axios from "axios";
 import {Link} from 'react-router-dom';
 
 const UserList = () => {
-const [users, setUser] = useState([]);
+  const [users, setUser] = useState([]);
 
-useEffect(() => {
-  getUsers();
-}, []);
-
-const getUsers = async () =>{
-  const response = await axios.get('http://localhost:5000/users');
-  setUser(response.data)
-}
-
-const deleteUser = async (id) => {
-  try{
-    await axios.delete(`http://localhost:5000/users/${id}`);
+  useEffect(() => {
     getUsers();
-  } catch (error) {
-    console.log(error);
+  }, []);
+
+  const getUsers = async () =>{
+    const response = await axios.get('http://localhost:5000/users');
+    setUser(response.data)
   }
-}
+
+  const deleteUser = async (id) => {
+    try{
+      await axios.delete(`http://localhost:5000/users/${id}`);
+      getUsers();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
    <div className='columns mt-5 is-centered'>
